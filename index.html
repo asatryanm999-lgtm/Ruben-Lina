@@ -10,26 +10,78 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+Armenian:wght@300;500;700&display=swap');
         
         :root {
-            --dark-brown: #5d4037;
-            --soft-beige: #FAF9F6; /* Սպիտակոտ բեժ */
-            --accent-brown: #8d6e63;
+            /* Մուգ շագանակագույն (Deep Espresso) */
+            --dark-brown: #3e2723; 
+            /* Սպիտակոտ բեժ */
+            --soft-beige: #FAF9F6; 
+            /* Ջնջվող շերտի մուգ գույնը */
+            --accent-brown: #5d4037; 
         }
 
-        body, html { margin: 0; padding: 0; font-family: 'Noto Sans Armenian', sans-serif; background: var(--soft-beige); overflow-x: hidden; scroll-behavior: smooth; color: var(--dark-brown); }
+        body, html { 
+            margin: 0; padding: 0; 
+            font-family: 'Noto Sans Armenian', sans-serif; 
+            background: var(--soft-beige); 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+            color: var(--dark-brown); 
+        }
         
-        #scratch-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--soft-beige); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease; text-align: center; padding: 20px; }
-        .scratch-instruction { font-size: 1.2rem; margin-bottom: 30px; font-weight: 700; color: var(--dark-brown); font-family: 'Dancing Script', cursive; }
+        /* Scratch Layer (Առաջին էջը) */
+        #scratch-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: var(--soft-beige); z-index: 9999; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            transition: opacity 1s ease; text-align: center; padding: 20px; 
+        }
+        
+        .scratch-instruction { 
+            font-size: 1.4rem; margin-bottom: 30px; font-weight: 800; 
+            color: var(--dark-brown); font-family: 'Dancing Script', cursive;
+            text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.1);
+        }
+        
         .scratch-wrapper { display: flex; gap: 15px; justify-content: center; }
-        .scratch-box { position: relative; width: 90px; height: 90px; border-radius: 50%; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1.5px solid var(--dark-brown); background: #fff; }
-        .under-text { position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; z-index: 1; font-size: 1.5rem; font-weight: 700; }
+        
+        .scratch-box { 
+            position: relative; width: 95px; height: 95px; border-radius: 50%; 
+            overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            border: 2px solid var(--dark-brown); background: #fff; 
+        }
+
+        .under-text { 
+            position: absolute; width: 100%; height: 100%; 
+            display: flex; align-items: center; justify-content: center; 
+            z-index: 1; font-size: 1.6rem; font-weight: 800; 
+            color: var(--dark-brown);
+        }
+
         canvas { position: absolute; top: 0; left: 0; z-index: 10; touch-action: none; cursor: crosshair; }
         
+        /* Main Invitation Content Design */
         #main-invitation { display: none; opacity: 0; transition: opacity 1.5s ease; }
-        .section { min-height: 100vh; padding: 100px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; }
         
-        .hero { background: linear-gradient(rgba(250, 249, 246, 0.3), rgba(250, 249, 246, 0.3)), url('couple1.jpg'); background-size: cover; background-position: center; height: 100vh; }
-        h1 { font-family: 'Dancing Script', cursive; font-size: 4.5rem; margin: 0; color: var(--dark-brown); }
-        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 20px 0; color: var(--dark-brown); }
+        .section { 
+            min-height: 100vh; padding: 100px 20px; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            text-align: center; box-sizing: border-box; 
+        }
+        
+        .hero { 
+            background: linear-gradient(rgba(250, 249, 246, 0.3), rgba(250, 249, 246, 0.3)), url('couple1.jpg'); 
+            background-size: cover; background-position: center; height: 100vh; 
+        }
+
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 4.8rem; margin: 0; 
+            color: var(--dark-brown); 
+            font-weight: bold;
+            text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.1); 
+        }
+
+        h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 20px 0; }
 
         .timer-grid { display: flex; gap: 10px; justify-content: center; margin: 40px 0; }
         .t-item { background: var(--dark-brown); color: var(--soft-beige); width: 70px; padding: 20px 0; border-radius: 15px; }
@@ -38,14 +90,38 @@
         #rBox { position: relative; width: 100%; max-width: 360px; height: 1300px; margin: 50px auto; }
         #pin { position: absolute; font-size: 2.5rem; z-index: 20; color: var(--dark-brown); transform: translate(-50%, -50%); transition: 0.1s linear; }
         
-        .img-fix { width: 100%; max-width: 400px; height: 500px; border-radius: 200px 200px 20px 20px; object-fit: cover; margin-bottom: 25px; border: 3px solid var(--dark-brown); }
-        .map-btn { display: inline-block; padding: 15px 40px; border: 2px solid var(--dark-brown); text-decoration: none; color: var(--dark-brown); font-weight: 700; transition: 0.4s; margin-top: 15px; background: transparent; }
+        .img-fix { 
+            width: 100%; max-width: 400px; height: 500px; 
+            border-radius: 200px 200px 20px 20px; object-fit: cover; 
+            margin-bottom: 25px; border: 4px solid var(--dark-brown); 
+        }
+
+        .map-btn { 
+            display: inline-block; padding: 15px 40px; 
+            border: 2px solid var(--dark-brown); text-decoration: none; 
+            color: var(--dark-brown); font-weight: 700; 
+            transition: 0.4s; margin-top: 15px; background: transparent;
+        }
         .map-btn:hover { background: var(--dark-brown); color: var(--soft-beige); }
 
-        .inp { width: 100%; border: none; border-bottom: 2px solid var(--dark-brown); padding: 15px; margin-bottom: 20px; background: transparent; font-size: 1.1rem; color: var(--dark-brown); text-align: center; }
-        .btn-send { width: 100%; padding: 20px; background: var(--dark-brown); color: var(--soft-beige); border: none; font-weight: 700; cursor: pointer; font-size: 1.1rem; }
+        .inp { 
+            width: 100%; border: none; border-bottom: 2px solid var(--dark-brown); 
+            padding: 15px; margin-bottom: 20px; background: transparent; 
+            font-size: 1.1rem; color: var(--dark-brown); text-align: center; outline: none;
+        }
 
-        .music-toggle { position: fixed; bottom: 30px; left: 30px; z-index: 1000; background: var(--dark-brown); color: var(--soft-beige); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .btn-send { 
+            width: 100%; padding: 20px; background: var(--dark-brown); 
+            color: var(--soft-beige); border: none; font-weight: 700; 
+            cursor: pointer; font-size: 1.1rem; 
+        }
+
+        .music-toggle { 
+            position: fixed; bottom: 30px; left: 30px; z-index: 1000; 
+            background: var(--dark-brown); color: var(--soft-beige); 
+            width: 50px; height: 50px; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; 
+        }
     </style>
 </head>
 <body>
