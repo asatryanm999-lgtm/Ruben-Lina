@@ -23,7 +23,7 @@
             scroll-behavior: smooth; 
         }
         
-        /* Scratch Layer */
+        /* Scratch Section */
         #scratch-container { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: var(--soft-beige); z-index: 9999; 
@@ -41,7 +41,7 @@
         .scratch-box { 
             position: relative; width: 95px; height: 95px; border-radius: 50%; 
             overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.15); 
-            border: 2px solid var(--dark-brown); background: #3e2723; /* Մուգ ֆոն սպիտակ թվերի համար */
+            border: 2px solid var(--dark-brown); background: #3e2723;
         }
 
         .under-text { 
@@ -53,7 +53,7 @@
 
         canvas { position: absolute; top: 0; left: 0; z-index: 10; touch-action: none; cursor: crosshair; }
         
-        /* Main Page Styling */
+        /* Main Invitation Content */
         #main-invitation { display: none; opacity: 0; transition: opacity 1.5s ease; }
         .section { min-height: 100vh; padding: 100px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-sizing: border-box; position: relative; }
         
@@ -74,17 +74,21 @@
 
         h2 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin: 20px 0; color: var(--dark-brown); }
 
-        /* Timer & Map Styles */
         .timer-grid { display: flex; gap: 10px; justify-content: center; margin: 40px 0; }
         .t-item { background: var(--dark-brown); color: #ffffff; width: 70px; padding: 20px 0; border-radius: 15px; }
         .t-val { font-size: 1.6rem; font-weight: 700; display: block; }
 
+        /* S-Road Road Path */
         #rBox { position: relative; width: 100%; max-width: 360px; height: 1300px; margin: 50px auto; }
         #pin { position: absolute; font-size: 2.5rem; z-index: 20; color: var(--dark-brown); transform: translate(-50%, -50%); transition: 0.1s linear; }
         
         .img-fix { width: 100%; max-width: 400px; height: 500px; border-radius: 200px 200px 20px 20px; object-fit: cover; margin-bottom: 25px; border: 4px solid var(--dark-brown); }
         .map-btn { display: inline-block; padding: 15px 40px; border: 2px solid var(--dark-brown); text-decoration: none; color: var(--dark-brown); font-weight: 700; margin-top: 15px; }
         
+        /* RSVP Styling */
+        .inp { width: 100%; border: none; border-bottom: 2px solid var(--dark-brown); padding: 15px; margin-bottom: 20px; background: transparent; font-size: 1.1rem; text-align: center; outline: none; box-sizing: border-box; }
+        .btn-send { width: 100%; padding: 20px; background: var(--dark-brown); color: #ffffff; border: none; font-weight: 700; cursor: pointer; border-radius: 5px; }
+
         .music-toggle { position: fixed; bottom: 30px; left: 30px; z-index: 1000; background: var(--dark-brown); color: #ffffff; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
     </style>
 </head>
@@ -138,6 +142,31 @@
 
         <section class="section" data-aos="fade-up"><img src="church.jpg" class="img-fix"><h2>Եկեղեցի</h2><a href="#" class="map-btn">ՔԱՐՏԵԶ</a></section>
         <section class="section" data-aos="fade-up"><img src="restaurant.jpg" class="img-fix"><h2>Prime Hall</h2><p>ՀԱՐՍԱՆՅԱՑ ՍՐԱՀ</p><a href="#" class="map-btn">ՔԱՐՏԵԶ</a></section>
+
+        <section class="section" data-aos="fade-up">
+            <div style="width: 100%; max-width: 400px; background: #fff; padding: 40px 20px; border: 1px solid var(--dark-brown); box-sizing: border-box;">
+                <h2 style="margin-bottom: 30px;">RSVP</h2>
+                <form id="inviteForm">
+                    <input type="text" placeholder="Անուն Ազգանուն" class="inp" required>
+                    
+                    <select class="inp" required>
+                        <option value="" disabled selected>Ում կողմից եք</option>
+                        <option>Հարսի</option>
+                        <option>Փեսայի</option>
+                    </select>
+
+                    <input type="number" placeholder="Հյուրերի քանակը" class="inp" required>
+                    
+                    <select class="inp" required>
+                        <option value="" disabled selected>Կմասնակցե՞ք</option>
+                        <option>Այո, սիրով</option>
+                        <option>Ցավոք, չեմ կարող</option>
+                    </select>
+                    
+                    <button type="submit" class="btn-send">ՈՒՂԱՐԿԵԼ</button>
+                </form>
+            </div>
+        </section>
     </div>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
@@ -157,7 +186,7 @@
             const ctx = canvas.getContext('2d');
             canvas.width = 95; canvas.height = 95;
             
-            // Ջնջվող շերտի գույնը (Մուգ շագանակագույն)
+            // Շագանակագույն ծածկույթ
             ctx.fillStyle = '#5d4037'; 
             ctx.fillRect(0, 0, 95, 95);
             ctx.globalCompositeOperation = 'destination-out';
@@ -194,6 +223,7 @@
             }, 1000);
         }
 
+        /* Moving Heart on Scroll */
         window.addEventListener('scroll', () => {
             const rBox = document.getElementById('rBox'), pin = document.getElementById('pin'), path = document.getElementById('pathLine');
             if (!rBox || !pin || !path) return;
@@ -205,6 +235,7 @@
             pin.style.top = (p.y / 1300) * rect.height + 'px';
         });
 
+        /* Wedding Countdown */
         const target = new Date("June 23, 2026 17:00:00").getTime();
         setInterval(() => {
             const d = target - new Date().getTime();
